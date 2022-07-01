@@ -171,7 +171,7 @@ impl<'de, E: Curve> Deserialize<'de> for PointFromBytes<E> {
             where
                 Err: Error,
             {
-                Point::from_bytes(v).map_err(|e| Err::custom(format!("invalid point: {}", e)))
+                Point::from_bytes(&Bytes::new(v)[..]).map_err(|e| Err::custom(format!("invalid point: {}", e)))
             }
 
             // serde_json serializes bytes as a sequence of u8, so we need to support this format too
